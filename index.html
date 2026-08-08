@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gesture Invisibility</title>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div id="app">
+  <div id="stage">
+    <video id="webcam" playsinline autoplay muted></video>
+    <canvas id="sceneCanvas"></canvas>
+
+    <div class="hud-top">
+      <div class="brand">VANISH·CAM <small>gesture invisibility</small></div>
+      <div class="status-pill">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText">starting camera…</span>
+      </div>
+    </div>
+
+    <div id="modeBadge" class="mode-badge visible-mode">
+      <span id="modeIcon">✋</span>
+      <span id="modeLabel">Visible</span>
+    </div>
+
+    <div class="hud-bottom">
+      <p id="promptText" class="prompt">Yellow box = your body · Purple box follows you while invisible · Fist = vanish</p>
+      <div class="gesture-key">
+        <span class="item"><span class="swatch visible"></span> Open palm — body visible</span>
+        <span class="item"><span class="swatch vanish"></span> Closed fist — body hidden</span>
+      </div>
+      <div id="bgStatus" class="bg-status missing">
+        <span id="bgStatusLabel">Background: not set</span>
+        <button type="button" id="changeBgBtn" class="change-bg-btn hidden">Change background</button>
+      </div>
+    </div>
+
+    <div id="setupOverlay" class="setup-overlay hidden">
+      <div class="setup-card">
+        <h2 class="setup-title">Step 1 — Set your background</h2>
+        <p class="setup-desc">
+          Take a photo of the <strong>empty room</strong> from the same spot as your camera
+          (without you in the frame), then upload it here.
+        </p>
+
+        <div id="bgPreviewWrap" class="bg-preview-wrap hidden">
+          <img id="bgPreview" class="bg-preview" alt="Background preview" />
+        </div>
+
+        <div class="setup-actions">
+          <label class="setup-btn setup-btn--primary">
+            Upload background photo
+            <input type="file" id="bgUpload" accept="image/*" hidden />
+          </label>
+          <button type="button" id="captureBgBtn" class="setup-btn">Capture from camera</button>
+        </div>
+
+        <p class="setup-hint">For “Capture from camera”: step out of the frame, then click the button.</p>
+
+        <button type="button" id="startBtn" class="setup-start" disabled>Start invisibility</button>
+      </div>
+    </div>
+
+    <div id="loadingOverlay">
+      <div class="loader-text" id="loaderText">loading AI models…</div>
+      <div class="loader-bar"></div>
+      <button type="button" id="loaderRetry" class="loader-retry hidden">retry</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
