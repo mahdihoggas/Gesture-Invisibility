@@ -39,9 +39,7 @@ const modeBadge = document.getElementById("modeBadge");
 const modeIcon = document.getElementById("modeIcon");
 const modeLabel = document.getElementById("modeLabel");
 const promptText = document.getElementById("promptText");
-const bgStatus = document.getElementById("bgStatus");
-const bgStatusLabel = document.getElementById("bgStatusLabel");
-const changeBgBtn = document.getElementById("changeBgBtn");
+
 
 const setupOverlay = document.getElementById("setupOverlay");
 const bgUpload = document.getElementById("bgUpload");
@@ -110,17 +108,7 @@ function isOpenPalm(landmarks) {
   );
 }
 
-function updateBgStatusUI() {
-  if (backgroundReady) {
-    bgStatus.className = "bg-status ready";
-    bgStatusLabel.textContent = "Background: ready";
-    changeBgBtn.classList.remove("hidden");
-  } else {
-    bgStatus.className = "bg-status missing";
-    bgStatusLabel.textContent = "Background: not set";
-    changeBgBtn.classList.add("hidden");
-  }
-}
+function updateBgStatusUI() {}
 
 function updateModeUI() {
   if (invisible) {
@@ -645,9 +633,29 @@ startBtn.addEventListener("click", () => {
   if (backgroundReady) hideSetupOverlay();
 });
 
-changeBgBtn.addEventListener("click", () => {
-  showSetupOverlay();
+
+const passcodeOverlay = document.getElementById("passcodeOverlay");
+const passcodeInput = document.getElementById("passcodeInput");
+const passcodeBtn = document.getElementById("passcodeBtn");
+const passcodeError = document.getElementById("passcodeError");
+
+function verifyPasscode() {
+  const code = passcodeInput.value.trim();
+  if (code === "1609") {
+    passcodeOverlay.style.display = "none";
+    boot();
+  } else {
+    passcodeError.textContent = "Incorrect passcode";
+    passcodeInput.style.borderColor = "#e0533d";
+    passcodeInput.value = "";
+    passcodeInput.focus();
+  }
+}
+
+passcodeBtn.addEventListener("click", verifyPasscode);
+passcodeInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") verifyPasscode();
 });
 
-loaderRetry.addEventListener("click", boot);
-boot();
+passcodeInput.focus();
+
