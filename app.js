@@ -635,29 +635,37 @@ startBtn.addEventListener("click", () => {
 
 
 const passcodeOverlay = document.getElementById("passcodeOverlay");
-const passcodeForm = document.getElementById("passcodeForm");
 const passcodeInput = document.getElementById("passcodeInput");
+const passcodeBtn = document.getElementById("passcodeBtn");
 const passcodeError = document.getElementById("passcodeError");
 
-function verifyPasscode(e) {
-  if (e) e.preventDefault();
-  const code = passcodeInput.value.trim();
+function verifyPasscode() {
+  const code = passcodeInput ? passcodeInput.value.trim() : "";
   if (code === "1609") {
-    passcodeOverlay.remove();
+    if (passcodeOverlay) passcodeOverlay.remove();
     boot();
   } else {
-    passcodeError.textContent = "Incorrect passcode";
-    passcodeInput.style.borderColor = "#e0533d";
-    passcodeInput.value = "";
-    passcodeInput.focus();
+    if (passcodeError) passcodeError.textContent = "Incorrect passcode";
+    if (passcodeInput) {
+      passcodeInput.style.borderColor = "#e0533d";
+      passcodeInput.value = "";
+      passcodeInput.focus();
+    }
   }
 }
 
-if (passcodeForm) {
-  passcodeForm.addEventListener("submit", verifyPasscode);
+if (passcodeBtn) {
+  passcodeBtn.addEventListener("click", verifyPasscode);
 }
 if (passcodeInput) {
+  passcodeInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      verifyPasscode();
+    }
+  });
   passcodeInput.focus();
 }
+
 
 
