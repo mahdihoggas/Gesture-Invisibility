@@ -635,14 +635,15 @@ startBtn.addEventListener("click", () => {
 
 
 const passcodeOverlay = document.getElementById("passcodeOverlay");
+const passcodeForm = document.getElementById("passcodeForm");
 const passcodeInput = document.getElementById("passcodeInput");
-const passcodeBtn = document.getElementById("passcodeBtn");
 const passcodeError = document.getElementById("passcodeError");
 
-function verifyPasscode() {
+function verifyPasscode(e) {
+  if (e) e.preventDefault();
   const code = passcodeInput.value.trim();
   if (code === "1609") {
-    passcodeOverlay.style.display = "none";
+    passcodeOverlay.remove();
     boot();
   } else {
     passcodeError.textContent = "Incorrect passcode";
@@ -652,10 +653,11 @@ function verifyPasscode() {
   }
 }
 
-passcodeBtn.addEventListener("click", verifyPasscode);
-passcodeInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") verifyPasscode();
-});
+if (passcodeForm) {
+  passcodeForm.addEventListener("submit", verifyPasscode);
+}
+if (passcodeInput) {
+  passcodeInput.focus();
+}
 
-passcodeInput.focus();
 

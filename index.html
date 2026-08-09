@@ -9,21 +9,21 @@
 <body>
 
 <div id="passcodeOverlay" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);">
-  <div style="text-align:center;padding:40px 36px;border-radius:20px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px rgba(0,0,0,0.4);max-width:360px;width:90%;">
+  <form id="passcodeForm" style="text-align:center;padding:40px 36px;border-radius:20px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px rgba(0,0,0,0.4);max-width:360px;width:90%;">
     <div style="font-size:40px;margin-bottom:12px;">🔒</div>
     <h2 style="color:#fff;font-family:'Inter',sans-serif;font-size:1.4rem;margin:0 0 6px;">Access Required</h2>
     <p style="color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:0.85rem;margin:0 0 24px;">Enter the passcode to continue</p>
-    <input id="passcodeInput" type="password" maxlength="10" placeholder="Enter passcode"
+    <input id="passcodeInput" type="password" maxlength="10" placeholder="Enter passcode" autocomplete="off" autofocus
       style="width:100%;box-sizing:border-box;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:1.1rem;text-align:center;letter-spacing:8px;outline:none;transition:border 0.2s;"
       onfocus="this.style.borderColor='#9b59d4'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
     <p id="passcodeError" style="color:#e0533d;font-family:'Inter',sans-serif;font-size:0.8rem;margin:10px 0 0;min-height:1.2em;"></p>
-    <button id="passcodeBtn" type="button"
+    <button id="passcodeBtn" type="submit"
       style="margin-top:16px;width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#9b59d4,#6c3fa0);color:#fff;font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 16px rgba(155,89,212,0.3);"
       onmouseenter="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(155,89,212,0.45)'"
       onmouseleave="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(155,89,212,0.3)'">
       Unlock
     </button>
-  </div>
+  </form>
 </div>
 
 <div id="app">
